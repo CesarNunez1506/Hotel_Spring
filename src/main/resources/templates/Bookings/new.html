@@ -1,105 +1,130 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Reserva tu habitacion</title>
+    <title>Reserva tu habitación</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 
     <!--FONT OSWALD-->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .nav-main {
+            background-color: #343a40;
+            padding: 1rem;
+        }
+
+        .nav-main a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .nav-main a:hover {
+            color: #ffd700; /* Color dorado en hover */
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-decoration: underline;
+            color: #343a40;
+            font-size: 2.5rem;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-success {
+            background-color: #ffd700; /* Color dorado */
+            border-color: #ffd700;
+        }
+
+        .btn-success:hover {
+            background-color: #ffc107; /* Color más oscuro al pasar el ratón */
+            border-color: #ffc107;
+        }
+
+        .btn-primary {
+            margin-left: 10px;
+        }
     </style>
-    <!--CUSTOM CSS-->
-    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-            <nav class="nav-main">
-                <a href="/Users">
-                    <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand">
-                </a>
-                <ul class="nav-menu">
+    <nav class="nav-main">
+        <a href="/Users">
+            <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand" style="height: 50px;">
+        </a>
+        <ul class="nav-menu d-inline-block">
+            <li class="d-inline"><a href="/Bookings/availability">Reservar habitación</a></li>
+            <li class="d-inline"><a href="/Bookings/VerHabitaciones">Nuestras habitaciones</a></li>
+            <li class="d-inline"><a href="#">Quienes somos</a></li>
+            <li class="d-inline"><a href="/Bookings/ConsultaReservas">Consultá tus reservas!</a></li>
+        </ul>
+        <ul class="nav-regis float-right">
+            <li>
+                <a><label id="Users" th:text="${#httpServletRequest.getRemoteUser ()}"></label></a>
+            </li>
+            <li>
+                <a href="/logout" methods="post" th:action="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </nav>
 
-                    <li>
-                        <a href="/Bookings/availability">
-                            Reservar habitacion
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/Bookings/VerHabitaciones">
-                            Nuestras habitaciones
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Quienes somos
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/Bookings/ConsultaReservas">
-                            Consultá tus reservas!
-                        </a>
-                    </li>
-
-
-                </ul>
-
-                <ul class="nav-regis">
-
-                    <li>
-                        <a><label   id="Users" th:text ="${#httpServletRequest.getRemoteUser()}" > </label></a>
-
-                    </li>
-                    <li>
-                        <a href="/logout" methods="post" th:action="@{/logout}">
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-
-
-            </nav>
-            <br>
-            <div class="container">
-                <div style="background-color: grey; text-align: center; height:500px">
-                    <br>
-                    <h1 style="text-decoration: underline beige; font-size:2.5rem">Nueva Reserva</h1>
-                    <p>
-                        <label>Precio</label>: <span th:text="${Booking.getRoomDTO().getPrice()}+'$'"></span>
-                    </p>
-                    <p>
-                        <label>Habitacion</label>: <span th:text="${Booking.getRoomDTO().name}"></span>
-                    </p>
-                    <p>
-                        <label>Check in</label>: <span th:text="${Booking.checkIn}"></span>
-                    </p>
-                        <label>Check out</label>: <span th:text="${Booking.checkOut}"></span>
-                    <p>
-                        <label>Ocupacion</label>: <span th:text="${Booking.occupancy}"></span>
-                    </p>
-                         <form action="#" th:action="@{/Bookings/confirm}" th:object="${Booking}" method="post">
-                        <input type="hidden" th:field="${Booking.checkIn}"/>
-                        <input type="hidden" th:field="${Booking.checkOut}"/>
-                        <input type="hidden" th:field="${Booking.occupancy}"/>
-                        <input type="hidden" th:name="roomId" th:value="${Booking.getRoomDTO().id}"/>
-                             <h2>Desea algun servicio adicional?</h2>
-                             <input type="checkbox" name="Desayuno"/>
-                             <label>Desayuno(+100$)</label>
-                             <input type="checkbox" name="Cochera"/>
-                             <label>Cochera(+300$)</label>
-                             <input type="checkbox" name="Cancelacion"/>
-                             <label>Cancelacion Gratis(+200$)</label>
-                             <br>
-                             <button type="submit" class="btn btn-success">Siguiente</button>
-                             <a href="/Users" class="btn btn-primary" >Cancelar Reserva</a>
-                         </form>
-
-                    <br>
-                </div>
+    <div class="container">
+        <h1>Nueva Reserva</h1>
+        <p>
+            <label>Precio</label>: <span th:text="${Booking.getRoomDTO().getPrice()} + '$'"></span>
+        </p>
+        <p>
+            <label>Habitación</label>: <span th:text="${Booking.getRoomDTO().name}"></span>
+        </p>
+        <p>
+            <label>Check in</label>: <span th:text="${Booking.checkIn}"></span>
+        </p>
+        <p>
+            <label>Check out</label>: <span th:text="${Booking.checkOut}"></span>
+        </p>
+        <p>
+            <label>Ocupación</label>: <span th:text="${Booking.occupancy}"></span>
+        </p>
+        <form action="POST" th:action="@{/Bookings/confirm}" th:object="${Booking}" method="post">
+            <input type="hidden" th:field="${Booking.checkIn}"/>
+            <input type="hidden" th:field="${Booking.checkOut}"/>
+ <input type="hidden" th:field="${Booking.occupancy}"/>
+            <input type="hidden" th:name="roomId" th:value="${Booking.getRoomDTO().id}"/>
+            <h2>¿Desea algún servicio adicional?</h2>
+            <div>
+                <input type="checkbox" name="Desayuno"/>
+                <label>Desayuno (+100$)</label>
             </div>
+            <div>
+                <input type="checkbox" name="Cochera"/>
+                <label>Cochera (+300$)</label>
+            </div>
+            <div>
+                <input type="checkbox" name="Cancelacion"/>
+                <label>Cancelación Gratis (+200$)</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Siguiente</button>
+            <a href="/Users" class="btn btn-primary">Cancelar Reserva</a>
+        </form>
+    </div>
 </body>
 </html>

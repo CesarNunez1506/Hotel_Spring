@@ -8,41 +8,84 @@
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
     </style>
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--FONT OSWALD-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .nav-main {
+            background-color: #343a40;
+            padding: 1rem;
+        }
+
+        .nav-main a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .nav-main a:hover {
+            color: #ffd700; /* Color dorado en hover */
+        }
+
+        .tit {
+            color: #343a40;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: #ffd700; /* Color dorado */
+            border-color: #ffd700;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffc107; /* Color más oscuro al pasar el ratón */
+            border-color: #ffc107;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-
 <body>
-            <nav class="nav-main">
-                <a href="/">
-                    <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand">
-                </a>
-                <ul class="nav-menu">
 
-                    <li>
-                        <a href="/Bookings/availability">
-                            Reservar habitacion
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Bookings/VerHabitaciones">
-                            Nuestras habitaciones
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            Quienes somos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Bookings/ConsultaReservas">
-                            Consultá tus reservas!
-                        </a>
-                    </li>
-
-                </ul>
-
-                
-            </nav>
+    <nav class="nav-main">
+        <a href="/Users">
+            <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand" style="height: 50px;">
+        </a>
+        <ul class="nav-menu d-inline-block">
+            <li class="d-inline"><a href="/Bookings/availability">Reservar habitación</a></li>
+            <li class="d-inline"><a href="/Bookings/VerHabitaciones">Nuestras habitaciones</a></li>
+            <li class="d-inline"><a href="#">Quienes somos</a></li>
+            <li class="d-inline"><a href="/Bookings/ConsultaReservas">Consultá tus reservas!</a></li>
+        </ul>
+        <ul class="nav-regis float-right">
+            <li>
+                <a><label id="Users" th:text="${#httpServletRequest.getRemoteUser ()}"></label></a>
+            </li>
+            <li>
+                <a href="/logout" methods="post" th:action="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </nav>
             <br>
             <div class="container">
                 <div class="titulo">
