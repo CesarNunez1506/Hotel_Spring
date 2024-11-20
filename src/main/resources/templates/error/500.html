@@ -2,65 +2,116 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Internal server error</title>
+    <title>Error 500</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <!--FONT OSWALD-->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
+        
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .nav-main {
+            background-color: #343a40;
+            padding: 10px 20px;
+        }
+
+        .nav-brand {
+            height: 50px;
+        }
+
+        .nav-menu, .nav-regis {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu li, .nav-regis li {
+            margin: 0 15px;
+        }
+
+        .nav-menu a, .nav-regis a {
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-regis a:hover {
+            color: #fff;
+        }
+
+        .showcase {
+            background-image: url('/img/principal.jpeg'); /* Ruta fija */
+            background-size: cover;
+            background-position: center;
+            color: #ffc107; /* Texto amarillo */
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .showcase p {
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
     </style>
-    <link rel="stylesheet" href="../css/style.css">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 <body>
-
-<nav class="nav-main">
-    <a href="/Users">
-        <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand">
-    </a>
-    <ul class="nav-menu">
-
-        <li>
-            <a href="/Bookings/availability">
-                Reservar habitacion
-            </a>
-        </li>
-
-        <li>
-            <a href="/Bookings/VerHabitaciones">
-                Nuestras habitaciones
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                Quienes somos
-            </a>
-        </li>
-        <li>
-            <a href="/Bookings/ConsultaReservas">
-                Consultá tus reservas!
-            </a>
-        </li>
-
-    </ul>
-
-</nav>
-<br>
-<div class="container">
-    <div class="titulo">
-        <br>
-        <h1 align="center" >Error 500</h1>
-        <br>
-        <div align="center" >
-            <div>
-                <h2>Oh no!,creemos que algo salió mal!, por favor, intentelo de nuevo</h2>
-            </div>
-            <br>
-
+    <nav class="nav-main navbar navbar-expand-lg navbar-dark">
+        <a href="/Users" class="navbar-brand">
+            <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="nav-menu navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Bookings/availability">Reservar habitación</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Bookings/VerHabitaciones">Nuestras habitaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quienes somos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Bookings/ConsultaReservas">Consultá tus reservas!</a>
+                </li>
+            </ul>
+    
+            <ul class="nav-regis navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><label id="Users" th:text="${#httpServletRequest.getRemoteUser()}"></label></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" methods="post" th:action="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="titulo text-center">
+            <h1>Error 500</h1>
+            <h2>Oh no! Algo salió mal. Por favor, inténtalo de nuevo.</h2>
         </div>
     </div>
-</div>
 </body>
 </html>
