@@ -199,6 +199,10 @@ public class BookingController {
             return "Bookings/cancelarReserva";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "Bookings/about";
+    }
 
     @GetMapping("/VerHabitaciones")
     public String verHabitaciones(Model model){

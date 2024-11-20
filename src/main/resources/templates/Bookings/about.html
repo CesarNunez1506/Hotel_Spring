@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre Nosotros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .nav-main {
+            background-color: #343a40;
+            padding: 1rem;
+        }
+
+        .nav-main a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .nav-main a:hover {
+            color: #ffd700; /* Color dorado en hover */
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h1, h2 {
+            color: #343a40;
+        }
+
+        h1 {
+            text-decoration: underline;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+
+        .founder {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .founder img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffffff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-main">
+        <a href="/Users">
+            <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand" style="height: 50px;">
+        </a>
+        <ul class="nav-menu d-inline-block">
+            <li class="d-inline"><a href="/Bookings/availability">Reservar habitación</a></li>
+            <li class="d-inline"><a href="/Bookings/VerHabitaciones">Nuestras habitaciones</a></li>
+            <li class="d-inline"><a href="#">Quienes somos</a></li>
+            <li class="d-inline"><a href="/Bookings/ConsultaReservas">Consultá tus reservas!</a></li>
+        </ul>
+        <ul class="nav-regis float-right">
+            <li>
+                <a><label id="Users" th:text="${#httpServletRequest.getRemoteUser()}"></label></a>
+            </li>
+            <li>
+                <a href="/logout" methods="post" th:action="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Sobre Nosotros</h1>
+        <p>Bienvenido a Hotel OK, donde la comodidad y la hospitalidad se encuentran. Nos dedicamos a ofrecer a nuestros huéspedes una experiencia inolvidable en un ambiente acogedor y elegante.</p>
+        
+        <h2>Nuestra Misión</h2>
+        <p>Proporcionar un servicio excepcional y un ambiente que haga sentir a nuestros huéspedes como en casa, asegurando que cada estancia sea memorable.</p>
+        
+        <h2>Nuestra Visión</h2>
+        <p>Ser el hotel preferido en la región, conocido por nuestra atención al detalle, servicios de calidad y un ambiente cálido y acogedor.</p>
+        
+        <h2>Valores</h2>
+        <ul>
+            <li>Hospitalidad: Creemos en ofrecer un servicio amable y genuino.</li>
+            <li>Calidad: Nos esforzamos por mantener los más altos estándares en todas nuestras instalaciones y servicios.</li>
+            <li>Integridad: Actuamos con honestidad y transparencia en todas nuestras interacciones.</li>
+            <li>Innovación: Buscamos constantemente nuevas formas de mejorar la experiencia de nuestros huéspedes.</li>
+        </ul>
+
+        <h2>Conoce a Nuestro Equipo</h2>
+        <div class="row">
+            <div class="col-md-3 founder">
+                <img src="../img/founder1.jpg" alt="Founder 1">
+                <h3>Fundador 1</h3>
+                <p>Descripción del fundador 1.</p>
+            </div>
+            <div class="col-md-3 founder">
+                <img src="../img/founder2.jpg" alt="Founder 2">
+                <h3>Fundador 2</h3>
+                <p>Descripción del fundador 2.</p>
+            </div>
+            <div class="col-md-3 founder">
+                <img src="../img/founder3.jpg" alt="Founder 3">
+                <h3>Fundador 3</h3>
+                <p>Descripción del fundador 3.</p>
+            </div>
+            <div class="col-md-3 founder">
+                <img src="../img/founder4.jpg" alt="Founder 4">
+                <h3>Fundador 4</h3>
+                <p>Descripción del fundador 4.</p>
+            </div>
+        </div>
+
+        <h2>Acerca del Proyecto</h2>
+        <p>Este proyecto está dedicado a proporcionar la mejor experiencia de hospitalidad a nuestros huéspedes. Nos esforzamos por ofrecer servicios de alta calidad y un ambiente acogedor para todos nuestros visitantes.</p>
+    </div>
+
+    <footer class="footer">
+        <p>Contacto:</p>
+        <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+        <p>Teléfono: +123 456 7890</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
