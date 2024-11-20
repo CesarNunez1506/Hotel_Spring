@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reserva tu habitacion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!--FONT OSWALD-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
+    </style>
+    <!--CUSTOM CSS-->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+        <!--<img class="img-fondo" src="../../static/img/imagen-fondo.jpg" alt="imagen fondo">-->
+        <nav class="nav-main">
+            <a href="/Users">
+                <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand">
+            </a>
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="/Bookings/availability">
+                        Reservar habitacion
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Bookings/VerHabitaciones">
+                        Nuestras habitaciones
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Quienes somos
+                    </a>
+                </li>
+                <li>
+                    <a href="/Bookings/ConsultaReservas">
+                        Consultá tus reservas!
+                    </a>
+                </li>
+
+
+            </ul>
+
+            <ul class="nav-regis">
+
+                <li>
+                    <a><label   id="Users" th:text ="${#httpServletRequest.getRemoteUser()}" > </label></a>
+
+                </li>
+                <li>
+                    <a href="/logout" methods="post" th:action="@{/logout}">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+
+
+        </nav>
+
+            <div  align="center"  >
+                <br>
+                <h1 class="tit">Disponibilidad de Habitaciones</h1>
+                <br>
+                <div  th:if="${mensaje}" class="alert alert-danger alert-dismissible fade show" >
+                    <button class="close" data-dismiss="alert"><span>&times;</span></button>
+                    Por favor!, ingrese <strong> fechas </strong> correctas!
+                </div>
+                <form id="form1" name="form1" action="#" th:action="@{/Bookings/availability}" th:object="${roomsAvailability}" method="post">
+
+                    <label id="lbl1" name="lbl1">Check in:</label>
+                    <input id="date" required name="date" type="date" th:field="*{checkIn}"/>
+
+                    <label id="lbl2"  name="lbl2">Check out:</label>
+                    <input id="txt2" required name="txt2" type="date" th:field="*{checkOut}"/>
+
+                    <label id="lbl3" name="lbl3">Ocupacion:</label>
+                    <input id="txt3" required name="txt3" type="number" min="1" max="4" th:field="*{occupancy}"/>
+
+                    <button type="submit" class="btn btn-primary">Chequear disponibilidad</button>
+                </form>
+
+                <br>
+                <div th:if="${rooms.empty}">
+                    Por favor, seleccione fechas para el check in y el check out,<br>
+                    si ha seleccionado fechas y no se muestra ninguna habitacion, es probable
+                    que todas las habitaciones esten reservadas
+                </div>
+                <div class="container">
+                    <table th:if="${rooms.size()>0}" class="table table-bordered table-dark table-sm">
+                        <thead>
+                            <tr>
+                                <th>Habitacion</th>
+                                <th>Ocupacion</th>
+                                <th>Facilidades</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr th:each="room: ${rooms}">
+                                <td><span th:text="${room.name}">Room </span></td>
+                                <td><span th:text="${room.occupancy}">Occupancy</span></td>
+                                <td><span th:text="${room.facilities}">Facilities</span></td>
+                                <td><span th:text="${room.price}+'$'">Price</span></td>
+                                <td>
+                                    <form action="#" th:action="@{/Bookings/new}" th:object="${Booking}" method="post">
+                                        <input type="hidden" th:name="checkIn" th:value="${roomsAvailability.checkIn}"/>
+                                        <input type="hidden" th:name="checkOut" th:value="${roomsAvailability.checkOut}"/>
+                                        <input type="hidden" th:name="occupancy" th:value="${roomsAvailability.occupancy}"/>
+                                        <input type="hidden" th:name="roomId" th:value="${room.id}"/>
+                                        <button type="submit" class="btn btn-info">Reservar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

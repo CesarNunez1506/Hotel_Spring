@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear tu cuenta de HotelPOO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
+    </style>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+            <nav class="nav-main">
+                <a href="/">
+                    <img src="../img/logo.jpg" alt="logo-hotel" class="nav-brand">
+                </a>
+                <ul class="nav-menu">
+
+                    <li>
+                        <a href="/Bookings/availability">
+                            Reservar habitacion
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Bookings/VerHabitaciones">
+                            Nuestras habitaciones
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Quienes somos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Bookings/ConsultaReservas">
+                            Consultá tus reservas!
+                        </a>
+                    </li>
+
+                </ul>
+
+                
+            </nav>
+            <br>
+            <div class="container">
+                <div class="titulo">
+
+                    <div  th:if="${mensaje}" class="alert alert-danger" role="alert">
+                        Ya existe un usuario con ese <strong>e-mail!</strong>
+                    </div>
+                <h1 align="center" >Crea tu cuenta de HotelPOO!</h1>
+
+                    <div align="center">
+                        <form action="#" th:action="@{/Users}" th:object="${user}" method="post">
+                            <div class="form-group">
+                                Nombre:
+                                <input type="text" required th:field="*{firstName}" class="form-control col-sm-3"/>
+                            </div>
+                            <div class="form-group">
+                                Apellido:
+                                <input type="text"  required th:field="*{lastName}" class="form-control col-sm-3">
+                            </div>
+
+                            <div class="form-group">
+                                Email:
+                                <input type="email" required th:field="*{email}" class="form-control col-sm-3">
+                            </div>
+                            <div class="form-group">
+                                Fecha de nacimiento:
+                                <input type="date" required th:field="*{birthDate}" class="form-control col-sm-3">
+                            </div>
+                            <div class="form-group">
+                                Nacionalidad:
+                                <input type="text" required th:field="*{nationality}" class="form-control col-sm-3">
+                            </div>
+
+                            <div class="form-group">
+                                Contraseña:
+                                <input type="password" required th:field="*{password}" class="form-control col-sm-3">
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Crear</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>
